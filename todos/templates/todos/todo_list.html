@@ -15,6 +15,7 @@
         {% block form_inp %}
         {% endblock %}
       </div>
+      {% if not task_detail %}
       <div class="col">
         <h5 class="">Todo List</h5>
         <table class="table">
@@ -24,32 +25,33 @@
               <th>Todo Title</th>
               <th>Todo Desc</th>
               <th>Todo Status</th>
+              <th>Progress%</th>
+              <th>Created At</th>
+              <th>Modified At</th>
+              <th>Completed At</th>
             </tr>
           </thead>
           <tbody>
             {% for todo in todos_list %}
             <tr>
               <td>{{ forloop.counter }}</td>
-              <td>{{ todo.title }}</td>
-              <td>{{ todo.desc }}</td>
+              <td><a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a></td>
+              <td>{{ todo.description }}</td>
               <td>
-                {% if todo.status %}
-                <button class="btn btn-success">
-                  Task Completed
+                <button class="btn {% if todo.status == 'C' %}btn-success{% elif todo.status == 'P'%}btn-warning{% elif todo.status == 'F'%}btn-danger{% else %}btn-info{% endif %}">
+                  {{ todo.status }}
                 </button>
-                {% else %}
-                  <div>
-                    <button class="btn btn-warning">
-                      Task in progress
-                    </button>
-                  </div>
-                {% endif %}
               </td>
+              <td>{{ todo.progress }}%</td>
+              <td>{{ todo.created_at }}</td>
+              <td>{{ todo.updated_at }}</td>
+              <td>{{ todo.completed_at }}</td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>

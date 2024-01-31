@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.template.loader import render_to_string
+
+from .models import Todo
 
 # Create your views here.
 demo_data = [
@@ -29,15 +31,17 @@ demo_data = [
 ]
 
 def get_todos(request):
+    todos = Todo.objects.all()
     return HttpResponse(render(request=request,
-                               template_name="todos/todo-list.html",
-                               context={"todos_list": demo_data, "selected_nav": 1}))
+                               template_name="todos/todo_list.html",
+                               context={"todos_list": todos, "selected_nav": 1}))
 
 
 def add_todos(request):
+    todos = Todo.objects.all()
     return HttpResponse(render(request=request,
                                template_name="todos/create_todos.html",
-                               context={"todos_list": demo_data, "selected_nav": 2}))
+                               context={"todos_list": todos, "selected_nav": 2}))
 
 
 def index(request):
@@ -68,3 +72,12 @@ def another_page(request):
                                    "selected_nav": 4
                                }))
 
+
+def update_task(request, task_id):
+    todo = get_object_or_404(klass=Todo, pk=task_id)
+    return HttpResponse(render(request=request,
+                               template_name="todos/create_todos.html",
+                               context={
+                                   "task_detail": todo,
+                                   "selected_nav": 2
+                               }))

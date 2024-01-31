@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -22,3 +23,6 @@ class Todo(models.Model):
 
     def __str__(self):
         return f"title: {self.title}, description: {self.description}, progress: {self.progress}, status: {self.status}, created_at: {self.created_at}, update_at: {self.updated_at}, completed_at: {self.completed_at}"
+
+    def get_absolute_url(self):
+        return reverse("update-task", args=[self.id])

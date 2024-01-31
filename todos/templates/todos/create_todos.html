@@ -1,4 +1,4 @@
-{% extends "./todo-list.html" %}
+{% extends "./todo_list.html" %}
 {% block form_inp %}
 <div class="container d-flex justify-content-center">
   <div class="col-6">
@@ -15,11 +15,40 @@
                 type="text"
                 class="form-control"
                 aria-describedby="addon-wrapping"
+                {% if task_detail %}
+                value="{{task_detail.title}}"
+                {% endif %}
               />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text text-info">Task Description</span>
-              <input type="text" aria-label="First name" class="form-control" />
+              <input 
+                type="text" aria-label="Task Description" 
+                class="form-control" 
+                {% if task_detail %}
+                value="{{task_detail.description}}"
+                {% endif %}
+                />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text text-info">Task Status</span>
+              <input 
+                type="text" aria-label="Task Status" 
+                class="form-control" 
+                {% if task_detail %}
+                value="{{task_detail.status}}"
+                {% endif %}
+                />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text text-info">Task Progress</span>
+              <input 
+                type="text" aria-label="Task Progress" 
+                class="form-control" 
+                {% if task_detail %}
+                value="{{task_detail.progress}}"
+                {% endif %}
+                />
             </div>
             <div class="col-12 d-flex justify-content-end">
               <button class="btn btn-primary" type="submit">Submit</button>
