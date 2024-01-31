@@ -1,0 +1,12 @@
+.bgc-light {
+  background-color: lightsteelblue;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}

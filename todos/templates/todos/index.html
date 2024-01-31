@@ -1,0 +1,41 @@
+{% extends "base.html"%}
+{% load static %}
+{% block links %}
+  <link rel="stylesheet" href="{% static 'todos/css/todos.css' %}">
+{% endblock %}
+{% block nav %}
+  {% include "./nav.html" with active_page=active_page name=name %}
+{% endblock %}
+{% block body_content %}
+<div class="container-fluid">
+  <div class="row">
+    {% include "./second_nav.html" %}
+    <div class="col-10 border">
+      <h5 class="mt-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores, voluptatum.</h5>
+      <div class="">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium est odio doloribus et eius totam necessitatibus sunt ad mollitia repellendus fuga corrupti quam quo libero labore, harum repudiandae aliquid veritatis.</p>
+        <p>Pariatur est ipsam in omnis fuga quasi obcaecati velit nisi iusto quas, cumque nemo magni voluptatem illo blanditiis inventore sint excepturi sequi nesciunt laborum unde atque impedit. Magnam, facilis numquam?</p>
+        <p>Dicta commodi dolores velit recusandae quibusdam porro qui totam, nesciunt delectus blanditiis repellat vitae expedita saepe beatae rerum pariatur a hic. Omnis provident nobis quas suscipit adipisci illum, eos aspernatur!</p>
+      </div>
+      <div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta aut accusantium illo totam consectetur est laborum culpa, unde mollitia tempore dignissimos corporis. Assumenda culpa alias ab pariatur quam ducimus esse.</p>
+        <p>Exercitationem beatae aliquam dolor deleniti illo veniam doloremque quisquam quo, earum officia voluptas atque in accusantium, quas labore! Nesciunt, unde. Quibusdam distinctio magni accusantium quae porro dignissimos suscipit consequatur reprehenderit!</p>
+        <p>Quasi similique eaque exercitationem nesciunt error, quas obcaecati tenetur facere reprehenderit sit quos, quae vel unde amet blanditiis delectus accusantium adipisci, doloremque facilis aspernatur dolore sequi laborum. Eaque, assumenda impedit.</p>
+      </div>
+      <div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima maxime eveniet nihil sapiente blanditiis, consectetur similique fugit officia ab architecto impedit esse temporibus quisquam harum repellat alias! Maxime, tempore ullam?</p>
+        <p>Nisi quasi libero similique nihil eius error id tempore est provident enim ea vel vitae assumenda harum quos porro deserunt earum officiis quisquam beatae, ex ratione ullam? Sint, atque commodi.</p>
+        <p>Pariatur ullam, fugit repellat facilis dolores ab nisi eligendi omnis doloribus accusantium veniam repudiandae voluptate alias, quae vero cumque rerum. Illo minima quibusdam aperiam quia adipisci itaque laborum distinctio exercitationem?</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock %}
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

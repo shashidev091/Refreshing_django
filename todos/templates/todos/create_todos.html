@@ -1,0 +1,31 @@
+{% extends "./todo-list.html" %}
+{% block form_inp %}
+<div class="container d-flex justify-content-center">
+  <div class="col-6">
+    <div class="col border rounded-top border-warning-subtle p-2 pb-0 mt-2 bg-primary-subtle">
+        <h5>Create Task</h5>
+    </div>
+    <div class="col border border-light-subtle border-top-0 p-3 rounded-bottom">
+        <form action="" method="post">
+            <div class="input-group flex-nowrap mb-3">
+              <span class="input-group-text text-warning" id="addon-wrapping">
+                Task Title &emsp;&emsp;&emsp;
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                aria-describedby="addon-wrapping"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text text-info">Task Description</span>
+              <input type="text" aria-label="First name" class="form-control" />
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
