@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+{% load static %}
+{% block links %}
+  <link rel="stylesheet" href="{% static 'todos/css/todos.css' %}">
+{% endblock %}
+{% block nav %}
+  {% include "./nav.html" with active_page=active_page name=name %}
+{% endblock %}
+{% block body_content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col p-0">
+      <div class="list-group rounded-0 text-center">
+        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Account</a>
+        <a href="#" class="list-group-item list-group-item-action">Career</a>
+        <a href="#" class="list-group-item list-group-item-action">Display</a>
+        <a href="#" class="list-group-item list-group-item-action">Privacy</a>
+        <a href="#" class="list-group-item list-group-item-action">Profile</a>
+      </div>
+    </div>
+    <div class="col-11"></div>
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock %}
