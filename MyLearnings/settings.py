@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'todos',
+    'todos.apps.TodosConfig',
+    'Settings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
