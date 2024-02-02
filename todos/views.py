@@ -11,7 +11,7 @@ def get_todos(request):
     todos = Todo.objects.all()
     return HttpResponse(render(request=request,
                                template_name="todos/todo_list.html",
-                               context={"todos_list": todos, "selected_nav": 1}))
+                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App"}))
 
 
 def add_todos(request):
@@ -44,4 +44,5 @@ def update_task(request, task_id):
 
 def delete_task(request, task_id):
     todo = get_object_or_404(klass=Todo, pk=task_id)
+    todo.delete()
     return redirect("todo_list")
