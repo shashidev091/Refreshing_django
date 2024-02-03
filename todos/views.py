@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.template.loader import render_to_string
 from datetime import date
+from django.views.decorators.http import require_POST
 
 from .models import Todo, Author
 
@@ -9,21 +10,27 @@ from .models import Todo, Author
 
 
 def get_todos(request):
-    todos = Todo.objects.all()
-    shashi = Author.objects.get(pk=1)
-    print(shashi)
-    todos_weget = shashi.todos.filter(progress__gt=9)
-    print(todos_weget)
+    todos = Todo.objects.all().order_by("-completed_at")[:10]
     return HttpResponse(render(request=request,
                                template_name="todos/todo_list.html",
                                context={"todos_list": todos, "selected_nav": 1, "name": "Todo App"}))
 
 
+@require_POST
 def add_todos(request):
+    title = request.POST.get("title")
+    desc = request.POST.get("desc")
+    progress = request.POST.get("progress")
+    status = request.POST.get("status")
+
     todos = Todo.objects.all()
+    author = Author.objects.get(pk=1)
+    todo = Todo(title=title, description=desc, progress=progress, status="P", author=author)
+    todo.save()
+    todos = Todo.objects.all().order_by("-created_at")[:10]
     return HttpResponse(render(request=request,
-                               template_name="todos/create_todos.html",
-                               context={"todos_list": todos, "selected_nav": 2}))
+                               template_name="todos/todo_list.html",
+                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App"}))
 
 
 def add_numbers(request, a):

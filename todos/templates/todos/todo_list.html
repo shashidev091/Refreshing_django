@@ -30,9 +30,9 @@
               <th>Todo Desc</th>
               <th>Todo Status</th>
               <th>Progress%</th>
-              <th>Created At</th>
-              <th>Modified At</th>
-              <th>Completed At</th>
+              <th class="text-nowrap">Created At</th>
+              <th class="text-nowrap">Updated At</th>
+              <th class="text-nowrap">Completed At</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -48,9 +48,9 @@
                 </button>
               </td>
               <td>{{ todo.progress }}%</td>
-              <td>{{ todo.created_at }}</td>
-              <td>{{ todo.updated_at }}</td>
-              <td>{{ todo.completed_at }}</td>
+              <td class="text-nowrap">{{ todo.created_at|date:"d M Y" }}</td>
+              <td>{% if todo.updated_at %} {{ todo.updated_at|date:"d M Y" }} {% else %} - {% endif %}</td>
+              <td>{% if todo.completed_at %} {{ todo.completed_at|date:"d M Y" }} {% else %} - {% endif %}</td>
               <td>
                 <div class="d-flex">
                   <button class="btn btn-success btn-sm">

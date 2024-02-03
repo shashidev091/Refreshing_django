@@ -21,15 +21,12 @@ class Author(models.Model):
                                   MinLengthValidator(limit_value=3)])
     last_name = models.CharField(max_length=10, validators=[
                                  MinLengthValidator(limit_value=3)])
-    email = models.EmailField()
-    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
+    email = models.EmailField(unique=True)
+    address = models.OneToOneField(
+        Address, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"""
-                first_name: {self.first_name},
-                last_name: {self.last_name},
-                email: {self.email}
-                """
+        return f"first_name: {self.first_name}, last_name: {self.last_name}, email: {self.email}"
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
