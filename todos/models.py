@@ -21,7 +21,7 @@ class Author(models.Model):
                                   MinLengthValidator(limit_value=3)])
     last_name = models.CharField(max_length=10, validators=[
                                  MinLengthValidator(limit_value=3)])
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     address = models.OneToOneField(
         Address, on_delete=models.CASCADE, null=True)
 
