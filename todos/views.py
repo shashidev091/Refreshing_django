@@ -5,32 +5,27 @@ from datetime import date
 from django.views.decorators.http import require_POST
 
 from .models import Todo, Author
+from .todo_form import TodoForm
 
 # Create your views here.
 
 
 def get_todos(request):
     todos = Todo.objects.all().order_by("-completed_at")[:10]
+    todo_form = TodoForm()
     return HttpResponse(render(request=request,
                                template_name="todos/todo_list.html",
-                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App"}))
+                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App", "todo_form": todo_form}))
 
 
 @require_POST
 def add_todos(request):
-    title = request.POST.get("title")
-    desc = request.POST.get("desc")
-    progress = request.POST.get("progress")
-    status = request.POST.get("status")
+    todo_form = TodoForm()
 
-    todos = Todo.objects.all()
-    author = Author.objects.get(pk=1)
-    todo = Todo(title=title, description=desc, progress=progress, status="P", author=author)
-    todo.save()
-    todos = Todo.objects.all().order_by("-created_at")[:10]
-    return HttpResponse(render(request=request,
-                               template_name="todos/todo_list.html",
-                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App"}))
+    # author = Author.objects.get(pk=1)
+    # todo = Todo(title=title, description=desc, progress=progress, status="P", author=author)
+    # todo.save()
+    return redirect("todo_list")
 
 
 def add_numbers(request, a):
