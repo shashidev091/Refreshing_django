@@ -1,4 +1,4 @@
-<form action="/todos/add-todos" method="post" class="modal fade" id="{% if modal_btn == 'modal_add' %}{{modal_btn}}{% else %}modal-desc-{{task_detail.id}}{% endif %}" tabindex="-1" aria-labelledby="todo_modal" aria-hidden="true">
+<form {% if task_detail %} action="{{task_detail.get_absolute_url}}" {% else %} action="/todos/add-todos" {% endif %} method="post" class="modal fade" id="{% if modal_btn == 'modal_add' %}{{modal_btn}}{% else %}modal-desc-{{task_detail.id}}{% endif %}" tabindex="-1" aria-labelledby="todo_modal" aria-hidden="true">
   {% csrf_token %}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -29,19 +29,16 @@
               {% if task_detail %}
               value="{{task_detail.description}}"
               {% endif %}
-              name="desc"
+              name="description"
               />
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text text-info">Task Status &emsp;&emsp;</span>
-            <input 
-              type="text" aria-label="Task Status" 
-              class="form-control" 
-              {% if task_detail %}
-              value="{{task_detail.get_status_display}}"
-              {% endif %}
-              name="status"
-              />
+            <select class="form-select" aria-label="Task Status" name="status">
+              {% for status, value in todo_status.items %}
+              <option value="{{status}}" {{task_detail.status}} {% if value == task_detail.get_status_display %}selected{% endif %}>{{value}}</option>
+              {% endfor %}
+            </select>
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text text-info">Task Progress &emsp;</span>
@@ -57,9 +54,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        {% if modal_btn == 'modal_add' %}
         <button type="submit" class="btn btn-primary">Save changes</button>
-        {% endif %}
       </div>
     </div>
 </form>

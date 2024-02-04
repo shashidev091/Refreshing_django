@@ -12,7 +12,7 @@
     {% include "./second_nav.html" %}
     <div class="col-10 border border-start-0">
       <div class="col {% if selected_nav == 2 %} pb-3 {% else %} mt-2 {% endif %} border-bottom">
-        {% include './create_todos.html' with task_detail=task_detail modal_btn='modal_add' %}
+        {% include './create_todos.html' with task_detail=task_detail modal_btn='modal_add' form=todo_form todo_status=todo_status %}
       </div>
       {% if not task_detail %}
       <div class="col">
