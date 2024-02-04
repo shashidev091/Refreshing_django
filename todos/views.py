@@ -15,16 +15,21 @@ def get_todos(request):
     todo_form = TodoForm()
     return HttpResponse(render(request=request,
                                template_name="todos/todo_list.html",
-                               context={"todos_list": todos, "selected_nav": 1, "name": "Todo App", "todo_form": todo_form}))
+                               context={"todos_list": todos, 
+                                        "selected_nav": 1, 
+                                        "name": "Todo App", 
+                                        "todo_form": todo_form,
+                                        "todo_status": Todo.TASK_STATUSES}))
 
 
 @require_POST
 def add_todos(request):
-    todo_form = TodoForm()
-
-    # author = Author.objects.get(pk=1)
-    # todo = Todo(title=title, description=desc, progress=progress, status="P", author=author)
-    # todo.save()
+    todo_form = TodoForm(request.POST)
+    author = Author.objects.get(pk=1)
+    if todo_form.is_valid():
+        print(todo_form.cleaned_data)
+        todo = Todo(**todo_form.cleaned_data, author=author)
+        todo.save()
     return redirect("todo_list")
 
 
@@ -39,15 +44,13 @@ def invalid_response(request):
     return JsonResponse({"Result": "Invlid key passed"})
 
 
+@require_POST
 def update_task(request, task_id):
     todo = get_object_or_404(klass=Todo, pk=task_id)
     todo.updated_at = date.today()
-    return HttpResponse(render(request=request,
-                               template_name="todos/create_todos.html",
-                               context={
-                                   "task_detail": todo,
-                                   "selected_nav": 2
-                               }))
+    todo_form = TodoForm(request.POST)
+    print(todo_form)
+    return redirect("todo_list")
 
 
 def delete_task(request, task_id):
