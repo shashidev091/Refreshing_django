@@ -5,7 +5,7 @@ from datetime import date
 from django.views.decorators.http import require_POST
 
 from .models import Todo, Author
-from .todo_form import TodoForm
+from .todo_form import TodoForm, TodoModelForm
 
 # Create your views here.
 
@@ -47,14 +47,31 @@ def invalid_response(request):
 @require_POST
 def update_task(request, task_id):
     todo = get_object_or_404(klass=Todo, pk=task_id)
-    todo.updated_at = date.today()
-    todo_form = TodoForm(request.POST)
-    print(todo_form)
+    todo_form = TodoModelForm(request.POST, instance=todo)
+    if todo_form.is_valid():
+        if todo_form.cleaned_data.get("status") == 'C':
+            todo.completed_at = date.today()
+        else:
+            todo.completed_at = None
+        print(todo_form.cleaned_data)
+        todo_form.save()
     return redirect("todo_list")
 
 
 def delete_task(request, task_id):
     todo = get_object_or_404(klass=Todo, pk=task_id)
-    print(todo.author.get_full_name())
-    # todo.delete()
+    todo.delete()
+    return redirect("todo_list")
+
+
+def mark_completed(request, task_id):
+    todo = get_object_or_404(klass=Todo, pk=task_id)
+    # mark todo completed
+    if todo.progress >= 80:
+        todo.status = 'C'
+        todo.completed_at = date.today()
+        todo.save()
+    else:
+        print("first complete the task progress and update it")
+
     return redirect("todo_list")
