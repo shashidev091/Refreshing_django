@@ -58,3 +58,14 @@ def delete_task(request, task_id):
     print(todo.author.get_full_name())
     # todo.delete()
     return redirect("todo_list")
+
+
+def mark_completed(request, task_id):
+    todo = get_object_or_404(klass=Todo, pk=task_id)
+    # mark todo completed
+    if todo.progress >= 80:
+        todo.status = 'C'
+    else:
+        print("first complete the task progress and update it")
+
+    return redirect("todo_list")
