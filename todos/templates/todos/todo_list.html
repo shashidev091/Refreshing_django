@@ -42,7 +42,7 @@
               <td>{{ forloop.counter }}</td>
               <td>{{ todo.title }}</td>
               <td>{{ todo.description }}</td>
-              <td class="text-center">
+              <td class="text-center text-nowrap">
                 <button class="btn {% if todo.status == 'C' %}btn-success{% elif todo.status == 'P'%}btn-warning{% elif todo.status == 'F'%}btn-danger{% else %}btn-info{% endif %}">
                   {{ todo.get_status_display }}
                 </button>
