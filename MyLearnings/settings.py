@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'todos.apps.TodosConfig',
-    'Settings',
+    'Settings.apps.SettingsConfig',
+    'DefaultView.apps.DefaultviewConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
