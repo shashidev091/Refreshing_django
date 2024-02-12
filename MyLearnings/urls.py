@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('DefaultView.urls')),
     path('admin/', admin.site.urls),
     path('todos/', include("todos.urls")),
-    path('settings/', include("Settings.urls"))
+    path('settings/', include("Settings.urls")),
+    path('marketplace/', include("MarketPlace.urls"))
 ]

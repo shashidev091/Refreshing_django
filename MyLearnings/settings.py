@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'todos.apps.TodosConfig',
     'Settings.apps.SettingsConfig',
     'DefaultView.apps.DefaultviewConfig',
+    'MarketPlace.apps.MarketplaceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
